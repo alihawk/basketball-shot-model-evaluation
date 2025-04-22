@@ -1,0 +1,42 @@
+# Byte‐compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# IDE/editor settings
+.vscode/
+*.suo
+*.user
+*.userprefs
+*.idea/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Temporary files
+*.log
+*.tmp
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Data files (if you don't want to commit large CSVs)
+# If you do want to commit dataset.csv, remove the next line
+dataset.csv
+
+# Build outputs
+*.pdf
+*.aux
+*.log
+*.out
+
+# Plots / figures if you regenerate them
+*.svg
