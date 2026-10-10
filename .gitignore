@@ -40,3 +40,6 @@ dataset.csv
 
 # Plots / figures if you regenerate them
 *.svg
+
+# IDE
+.idea/
