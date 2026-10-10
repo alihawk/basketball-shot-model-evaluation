@@ -1,38 +1,32 @@
 # Basketball Shot Model Evaluation
 
-This repository contains the code and report for **HW1: Model Evaluation**  
-(UL FRI Data Science, 2024–2025) by Muhammad Ali.
+How well can simple models predict the type of a basketball shot, and how far can we trust the usual evaluation numbers? This project compares four classifiers on a dataset of basketball shots and looks at where and why they make mistakes.
 
-## 📂 Project Structure
+![Average log-loss by shot distance](distance_bin_error.svg)
 
-- `part1_2.py`  
-  Combined code for:
-  1. Comparing four classifiers (Baseline, Logistic Regression, kNN train‑fold, kNN nested CV)  
-     via 5‑fold CV, reporting log‑score and accuracy (with ±std).  
-  2. Analyzing log‑loss error vs. shot distance and reweighting by true competition frequencies.
-- `dataset.csv`  
-  Basketball shot data (features + `ShotType`).
-- `*.svg`  
-  Generated plots:  
-  - `overall_performance.svg`  
-  - `distance_error_correlation.svg`  
-  - `distance_bin_error.svg`  
-  - `competition_performance.svg`
-- `report/`  
-  LaTeX source and compiled PDF of the write‑up.
+## What I did
 
-## 📈 Results Highlights
+- Compared a baseline, logistic regression, kNN with k chosen on the training folds, and kNN tuned with nested cross-validation. Each model was evaluated with 5-fold CV on log-score and accuracy, with standard deviations.
+- Looked at how prediction error changes with shot distance.
+- Reweighted the evaluation by how often each competition actually appears (NBA 0.6, the others 0.1) to see how much that shifts the overall numbers.
 
-- **Logistic Regression** was the top performer (lowest log‑score & highest accuracy).  
-- **kNN** benefited from nested CV tuning but still trailed logistic regression.  
-- There’s a moderate negative correlation (r = −0.46) between **Distance** and **log‑loss error**.  
-- Reweighting competition types (NBA 0.6, others 0.1) shifts the overall performance metrics.
+## Results
 
-## 🔧 How to run
+- Logistic regression did best, with the lowest log-score and the highest accuracy.
+- Nested CV helped kNN, but it still trailed logistic regression.
+- Error is moderately negatively correlated with distance (r = -0.46). Shots close to the basket are the hardest to classify.
+- Reweighting by competition frequency changes the overall metrics noticeably, so the choice of evaluation set matters.
 
-1. Create a virtual environment and install dependencies:
-   ```bash
-   python -m venv .venv
-   .venv\Scripts\activate      # Windows
-   # or source .venv/bin/activate  # macOS/Linux
-   pip install -r requirements.txt
+## Files
+
+- `model_evaluation.py`: model comparison, distance analysis and all plots
+- `competition_reweighting.py`: the competition reweighting on its own
+- `dataset.csv`: shot data, with the shot type as the target
+- `*.svg`: the generated plots
+
+## Running it
+
+```bash
+pip install numpy pandas scikit-learn matplotlib
+python model_evaluation.py
+```
